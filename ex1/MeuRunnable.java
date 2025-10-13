@@ -16,6 +16,6 @@ public class MeuRunnable {
         // inicializa o servidor e aguarda os módulos estarem prontos
         executor.submit(server::startServer);
 
-        executor.shutdown();
+        executor.shutdown(); //impede novas submissões de tarefas e encerra o executor quando todas as tarefas forem concluídas
     }
 }
