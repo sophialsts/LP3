@@ -13,7 +13,7 @@ public class ModuleLoader implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() { // é chamado automaticamente quando o executor roda para criar a thread (padrão Runnable)
         try {
             System.out.println("[CARREGANDO] Módulo " + nomeModulo + " iniciando...");
             Thread.sleep(tempoCarregamento);
@@ -22,7 +22,7 @@ public class ModuleLoader implements Runnable {
             Thread.currentThread().interrupt();
             System.out.println("[ERRO] Carregamento do módulo " + nomeModulo + " interrompido.");
         } finally {
-            latch.countDown(); 
+            latch.countDown(); //garante que o latch será decrementado mesmo em caso de erro
         }
     }
 }
