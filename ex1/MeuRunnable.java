@@ -2,7 +2,7 @@ import java.util.concurrent.*;
 
 public class MeuRunnable {
     public static void main(String[] args) {
-        CountDownLatch latch = new CountDownLatch(4);
+        CountDownLatch latch = new CountDownLatch(4); //para os 4 módulos
         ServerInitializer server = new ServerInitializer(latch);
 
         ExecutorService executor = Executors.newCachedThreadPool();

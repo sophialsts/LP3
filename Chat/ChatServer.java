@@ -6,7 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ChatServer {
 
     private static final int PORT = 12345;
-    private static final List<ClientHandler> clients = new CopyOnWriteArrayList<>();
+    private static final List<ClientHandler> clients = new CopyOnWriteArrayList<>(); // thread-safe, armazena clientes
 
     public static void main(String[] args) {
         System.out.println("[Servidor] Ouvindo na porta " + PORT + "...");
