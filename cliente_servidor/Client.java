@@ -9,14 +9,16 @@ public class Client {
         try (Socket socket = new Socket("localhost", 12345)) {
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            
             System.out.println("Enviado arquivo para o servidor");
-            sendFile("/Downloads/Relatório_redes1.pdf");
+            sendFile("/home/sophis/Downloads/Requisitos_SistemaEscola.pdf");
             dataInputStream.close();
             dataInputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private static void sendFile(String path) throws Exception{
         int bytes = 0;
         File file = new File(path);
