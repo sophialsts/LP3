@@ -39,5 +39,14 @@ class GerenciadorEstatisticas {
         System.out.println("║          RELATÓRIO FINAL               ║");
         System.out.println("╚════════════════════════════════════════╝");
         // TODO: Completar
+
+        System.out.printf("Tempo total de execução: %.2f segundos\n", tempoTotal / 1000.0);
+        System.out.println("Pedidos gerados: " + pedidosGerados.get());
+        System.out.println("Pedidos processados: " + pedidosProcessados.get());
+        System.out.println("Pedidos rejeitados: " + pedidosRejeitados.get());
+        System.out.println("Pedidos na fila ao final: " + (pedidosGerados.get()   - pedidosProcessados.get() - pedidosRejeitados.get()));
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║          FIM DO RELATÓRIO              ║");
+        System.out.println("╚════════════════════════════════════════╝\n"); 
     }
 }

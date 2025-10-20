@@ -17,6 +17,7 @@ class Monitor implements Runnable {
                 // TODO: A cada 2 segundos, exibir estatísticas
                 Thread.sleep(2000);
                 stats.exibirEstatisticas(fila.size());
+                
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
