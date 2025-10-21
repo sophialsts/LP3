@@ -39,7 +39,9 @@ public class ChatClient {
                     break;
                 }
             }
-            try { reader.join(300); } catch (InterruptedException ignore) {}
+            try { 
+                reader.join(300); //quando o running é setado como false, ele encerra o reader e acaba aqui, com isso tudo que foi criado com o try lá de cima é fechado automaticamente.
+            } catch (InterruptedException ignore) {}
         } catch (IOException e) {
             System.err.println("[Cliente] Erro: " + e.getMessage());
         }

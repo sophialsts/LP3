@@ -21,7 +21,7 @@ public class MainEstacionamento {
 
         System.out.println("\n=== INICIANDO SIMULAÇÃO ===\n");
         for (Veiculo v : veiculos) {
-            executor.submit(v);
+            executor.submit(v); // consigo saber o status do andamento, com future
             Thread.sleep(300); // pequena defasagem de chegada
         }
 
