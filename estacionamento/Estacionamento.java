@@ -31,6 +31,8 @@ public class Estacionamento {
             }
         }
 
+        // tryAcquire() para não travar o portão de entrada, e o de prioridade poder testar a regular se não tiver
+
         portaoEntrada.release();
 
         if (conseguiuVaga) {
