@@ -23,11 +23,11 @@ public class SistemaProcessamento {
         ExecutorService produtores = Executors.newFixedThreadPool(3);
         
         // TODO: Criar 3 produtores (API, Web, Mobile) - cada um gera 20 pedidos
-        for(int i=0;i<3;i++) {
-            int indice = random.nextInt(3);
-            String tipo = tiposProdutores[indice];
-            produtores.submit(new Produtor(fila, tipo, 20, stats));
+        for (String tipo : tiposProdutores) {
+            int quantidadePedidos = random.nextInt(30) + 20;
+            produtores.submit(new Produtor(fila, tipo, quantidadePedidos, stats));
         }
+
         // TODO: Criar ExecutorService para consumidores (5 threads)
         ExecutorService consumidores = Executors.newFixedThreadPool(5);
         
@@ -40,14 +40,15 @@ public class SistemaProcessamento {
 
         // TODO: Aguardar produtores finalizarem
         produtores.shutdown();
-        produtores.awaitTermination(30,TimeUnit.SECONDS);
+        produtores.awaitTermination(10,TimeUnit.SECONDS);
         
         // TODO: Aguardar consumidores finalizarem
         consumidores.shutdown();
-        consumidores.awaitTermination(30,TimeUnit.SECONDS);
+        consumidores.awaitTermination(10,TimeUnit.SECONDS);
 
         // TODO: Parar monitor
         monitor.parar();
+        execMonitor.shutdown();
 
         // TODO: Exibir relatório final
         stats.exibirRelatorioFinal();
