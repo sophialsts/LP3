@@ -8,7 +8,7 @@ public class SistemaProcessamento {
         System.out.println("║   SISTEMA DE PROCESSAMENTO DE PEDIDOS  ║");
         System.out.println("╚════════════════════════════════════════╝\n");
         
-        BlockingQueue<Pedido> fila = new LinkedBlockingQueue<Pedido>(50);
+        BlockingQueue<Pedido> fila = new PriorityBlockingQueue<Pedido>(50);
         GerenciadorEstoque estoque = new GerenciadorEstoque();
         GerenciadorEstatisticas stats = new GerenciadorEstatisticas();
         Monitor monitor = new Monitor(fila, stats);
@@ -35,13 +35,15 @@ public class SistemaProcessamento {
 
         for(int i=0;i<5;i++) {
             int id = random.nextInt(1000);
-            produtores.submit(new Consumidor(id, fila, estoque, stats));
+            consumidores.submit(new Consumidor(id, fila, estoque, stats));
         }
 
         // TODO: Aguardar produtores finalizarem
+        produtores.shutdown();
         produtores.awaitTermination(30,TimeUnit.SECONDS);
         
         // TODO: Aguardar consumidores finalizarem
+        consumidores.shutdown();
         consumidores.awaitTermination(30,TimeUnit.SECONDS);
 
         // TODO: Parar monitor
