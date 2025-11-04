@@ -1,7 +1,9 @@
 package RMI.Chat;
 
 import java.rmi.RemoteException;
-// TODO: Importar as classes necessárias para o RMI (Registry, etc.)
+import java.rmi.registry.*;
+import java.rmi.server.UnicastRemoteObject;
+
 // TODO: Importar a classe para a exportação manual (UnicastRemoteObject)
 
 /**
@@ -15,7 +17,6 @@ public class ChatServidorImpl implements IChatServidor {
      * O construtor é simples, pois não precisamos chamar 'super()'.
      */
     public ChatServidorImpl() {
-        super();
         System.out.println("Objeto do servidor criado.");
     }
 
@@ -27,7 +28,7 @@ public class ChatServidorImpl implements IChatServidor {
      */
     @Override
     public void conectar(String nomeCliente) throws RemoteException {
-        // ... sua implementação aqui ...
+        System.out.println(nomeCliente + " conectou-se ao chat.");
     }
 
 
@@ -38,7 +39,7 @@ public class ChatServidorImpl implements IChatServidor {
      */
     @Override
     public void enviarMensagem(String nomeCliente, String mensagem) throws RemoteException {
-        // ... sua implementação aqui ...
+        System.out.println(nomeCliente + ": " + mensagem);
     }
 
 
@@ -59,17 +60,14 @@ public class ChatServidorImpl implements IChatServidor {
             //    Você precisa usar o método estático de 'UnicastRemoteObject'.
             //    Guarde o resultado (que é o 'Stub') em uma variável.
             //    (Dica: O segundo parâmetro pode ser 0, para usar uma porta anônima).
-            IChatServidor stub = null; // ... substitua 'null' pela chamada de exportação ...
-            
+            IChatServidor stub = (IChatServidor) UnicastRemoteObject.exportObject(servidor,0); 
             
             // 3. TODO: Criar o "Porteiro" (Registry) em uma porta (ex: 1099).
-            // ... seu código para criar o registry aqui ...
-
+            Registry registry = LocateRegistry.createRegistry(1098);
             
             // 4. TODO: Registrar o 'stub' (que você obteve no passo 2) no "Porteiro".
             //    Dê a ele um nome fácil de lembrar (ex: "ChatRMI").
-            // ... seu código para fazer o rebind aqui ...
-
+            registry.rebind("ChatRMI", stub);
             
             System.out.println("Servidor está no ar. Aguardando clientes.");
 

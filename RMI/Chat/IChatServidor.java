@@ -18,8 +18,7 @@ public interface IChatServidor extends Remote {
      * - Ele deve receber um parâmetro (o nome do cliente).
      * - Ele deve (obrigatoriamente) declarar que pode lançar uma RemoteException.
      */
-    // void ...(...);
-    
+    void conectar (String nomeCliente) throws RemoteException;
     
     /**
      * (Passo 2) Um cliente usa este método para enviar uma mensagem.
@@ -27,6 +26,6 @@ public interface IChatServidor extends Remote {
      * - Ele deve receber dois parâmetros (o nome do cliente e a mensagem).
      * - Ele também deve declarar a RemoteException.
      */
-    // void ...(...);
+    void enviarMensagem(String nomeCliente, String mensagem) throws RemoteException;
     
 }
